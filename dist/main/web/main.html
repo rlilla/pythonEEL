@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="/eel.js"></script>
+
+    <title>LISTA DE PREÇO ITENS FORA DE LINHA</title>
+    <script>
+        function pesquisa(){
+            var valor=document.getElementById("txtCod").value
+            console.log(valor)
+            eel.consultar(valor)((ee) => {
+            let lista=""
+            for(x in ee["codigo"]){
+                //lista+="<p id=\">" + ee["codigo"][x] + "\"onclick=\"func3(this.id)\">" + ee["codigo"][x] + "  " + ee["descricao"][x] + "</p>"
+                //lista+=`<p id=${ee["codigo"][x]} onclick="func3(this.id)"> ${ee["codigo"][x]} ${ee["descricao"][x]} </p>`
+                lista+=`<tr><td>${ee["codigo"][x]}</td><td>${ee["descricao"][x]}</td><td>US$ ${ee["preco"][x].toFixed(2)}</td></tr>`
+            }
+
+            let tabela = `<table class="table table-striped"><thead><tr><th>Código</th><th>Descrição</th><th>Preço</th></tr></thead>`;
+
+
+            document.getElementById("divTabela").innerHTML = tabela + lista + "</table>"
+        })
+        }
+
+
+        function func3(id){
+            console.log(id)
+        }
+
+    </script>
+</head>
+<body class="bg-primary">
+    <div class="container p-3 my-3 bg-primary text-white">
+        <h4>Digite no campo abaixo o código ou parte da descrição do equipamento desejado.</h4><BR>
+        <h4>OBS.: Ítens terminados eom FW precisam ser acompanhados do firmware.</h4> <BR><BR>
+        <h4>Código ou Descrição:</h4> <input type="text" id="txtCod" onkeyup="pesquisa()")><BR><BR>
+    <div id="divTabela">
+
+    </div>
+    </div>
+</body>
+</html>
