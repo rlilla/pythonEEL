@@ -21,7 +21,11 @@ def consultar(descricao):
 def consultarNCM(codigo):
     xx = df1[df1['NCM']==codigo]
     print(xx['Categoria'][0])
-    return xx['Categoria'][0]
+    y=dict()
+    y['cat'] = xx['Categoria'][0]
+    y['valor'] = 10
+    print(y)
+    return y
 
 
 eel.start('main.html',size=(largura, altura))
