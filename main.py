@@ -15,12 +15,13 @@ def teste(var1):
 @eel.expose
 def consultar(descricao):
     x = df[df['descricao'].str.contains(descricao) | df['codigo'].str.contains(descricao)].to_dict()
+    print (x)
     return x
 @eel.expose
 def consultarNCM(codigo):
-    x = df1[df1['NCM']==codigo].to_dict()
-    print(x)
-    return x
+    xx = df1[df1['NCM']==codigo]
+    print(xx['Categoria'][0])
+    return xx['Categoria'][0]
 
-consultarNCM(1012100)
+
 eel.start('main.html',size=(largura, altura))

@@ -24,6 +24,7 @@
         }
 
         function pesquisa(){
+            pesquisaNCM();
             cambio();
             var valor=document.getElementById("txtCod").value
             console.log(valor)
@@ -43,8 +44,12 @@
         }
 
 
-        function func3(id){
-            console.log(id)
+        function pesquisaNCM(){
+            //var codigo=Number(document.getElementById("txtCod").value)
+            var codigo = 1012100;
+            eel.consultarNCM(codigo)((ff) => {
+                console.log(ff)
+            })
         }
 
     </script>
