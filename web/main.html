@@ -8,7 +8,23 @@
 
     <title>LISTA DE PREÇO ITENS FORA DE LINHA</title>
     <script>
+        function cambio(){
+            var req=new XMLHttpRequest();
+            req.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200){
+                resposta=req.responseText;
+                //console.log(resposta);
+                var valoresAtuais=JSON.parse(resposta);
+                console.log(valoresAtuais["USD"]["ask"]);
+                document.getElementById("dolar").innerHTML = `Cotação do dólar: ${Number(valoresAtuais["USD"]["ask"]).toFixed(2)}`;
+            }
+	}
+            req.open("GET"," https://economia.awesomeapi.com.br/all/USD-BRL",true);
+            req.send();
+        }
+
         function pesquisa(){
+            cambio();
             var valor=document.getElementById("txtCod").value
             console.log(valor)
             eel.consultar(valor)((ee) => {
@@ -39,6 +55,7 @@
         <h4>OBS.: Itens terminados em FW precisam ser acompanhados do firmware.</h4> <BR>
         <h4>Caso o item desejado não seja encontrado, entrar em contato com Fabio Luciano</h4><BR>
         <h4>Código ou Descrição:</h4> <input type="text" id="txtCod" onkeyup="pesquisa()")><BR><BR>
+        <div id="dolar">Cotação do dólar:</div>
     <div id="divTabela">
 
     </div>
